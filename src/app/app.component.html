@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="container d-flex align-items-center justify-content-around">
+    <app-new-show-form (createElement)="createElement($event)"></app-new-show-form>
+    <app-filters (sortAlpha)="sortAlpha()" (reverseOrder)="reverseOrder()"></app-filters>
+  </div>
+  
+  <app-show-list [shows]="shows" (deleteCard)="deleteElement($event)"></app-show-list>
+</div>
