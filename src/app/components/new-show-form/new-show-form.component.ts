@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Show } from '../../interfaces/show.interface';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,9 +11,18 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   styleUrl: './new-show-form.component.css'
 })
 
-export class NewShowFormComponent {
+export class NewShowFormComponent implements OnChanges{
   @Output()
   public createElement: EventEmitter<Show> = new EventEmitter();
+  @Input() editingShow: Show = {
+    name: "",
+    description: "",
+    image: "",
+    year: 0,
+    episodes: 0,
+    genre: "",
+    likes: [],
+  };
 
   public form: FormGroup;
   public isFormSubmitted: boolean = false;
@@ -43,6 +52,22 @@ export class NewShowFormComponent {
       this.isFormSubmitted = false;
     } else {
       console.log("Something is wrong");
+    }
+  }
+  
+  ngOnChanges(): void {
+    console.log("debugggg")
+    this.form.patchValue({
+      name: this.editingShow.name,
+      image: this.editingShow.image,
+      description: this.editingShow.description
+    });
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.createElement.emit(this.form.value);
+      this.form.reset(); 
     }
   }
 }

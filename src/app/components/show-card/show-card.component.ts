@@ -13,7 +13,7 @@ import { Show } from '../../interfaces/show.interface';
 export class ShowCardComponent {
   @Output()
   public deleteCard: EventEmitter<string> = new EventEmitter();
-  
+  @Output() editCard = new EventEmitter<Show>();
   @Input()
   public show: Show = {
     name: "",
@@ -33,5 +33,9 @@ export class ShowCardComponent {
 
   public onDeleteCard(){
     this.deleteCard.emit(this.show.name);
+  }
+
+  public editShow(show: Show): void {
+    this.editCard.emit(show);
   }
 }

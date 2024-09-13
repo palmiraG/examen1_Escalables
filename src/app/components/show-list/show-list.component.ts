@@ -18,8 +18,14 @@ export class ShowListComponent {
   @Input()
   public shows: Show[] = [];
 
+  @Output() editCard = new EventEmitter<Show>(); 
+
   public deleteElement(name: string): void {
     this.deleteCard.emit(name);
+  }
+  public editShow(show: Show): void {
+    console.log("HEloooo")
+    this.editCard.emit(show); 
   }
 }
 

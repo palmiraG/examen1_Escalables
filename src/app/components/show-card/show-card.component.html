@@ -4,6 +4,9 @@
       <p (click)="onDeleteCard()" style="float: right; cursor: pointer;">x</p>
       <h5 class="card-title">{{show.name}}</h5>
       <p class="card-text">{{show.description}}</p>
-      <button (click)="changeSelected()" class="btn btn-primary">{{isSelected ? "Deseleccionar" : "Seleccionar"}}</button>
+      <div class= "container d-flex align-items-center justify-content-around">
+        <button (click)="editShow(show)" class="btn btn-primary">Editar</button>
+        <button (click)="changeSelected()" class="btn btn-primary">{{isSelected ? "Deseleccionar" : "Seleccionar"}}</button>
+      </div>
   </div>
 </div>

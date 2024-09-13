@@ -18,6 +18,17 @@ import { FiltersComponent } from './components/filters/filters.component';
 
 export class AppComponent {
 
+    public band: boolean = false;
+
+    public editingShow: Show = {
+        name: "",
+        description: "",
+        image: "",
+        year: 0,
+        episodes: 0,
+        genre: "",
+        likes: [],
+      };
     public shows: Show[] = [
         {
             "name": "Breaking Bad",
@@ -180,4 +191,21 @@ export class AppComponent {
     public reverseOrder(): void{
         this.shows.reverse();
     }
+    public editElement(show: Show): void {
+        console.log(show)
+        this.editingShow = show;
+        this.band = true;
+    }
+    public createOrUpdateElement(show: Show): void {
+        console.log("funcion edite");
+        if (this.band) {
+          const index = this.shows.findIndex(s => s.name === this.editingShow?.name);
+          if (index !== -1) {
+            this.shows[index] = show ;
+          }
+          this.band = false;
+        } else {
+          this.shows.push(show);
+        }
+      }
 }
